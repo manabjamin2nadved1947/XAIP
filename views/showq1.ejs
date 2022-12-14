@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+</script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>show</title>
+</head>
+<body>
+    <p id="pass">
+                <% //var file1= JSON.stringify(global.file1.name) %>
+                <%= //file1 = file1.slice(1,-6) %>
+                
+                <br>
+                <% //var file2 = JSON.stringify(global.file2.name) %>
+                <%= //file2 = file2.slice(1,-6) %>
+                
+              </p>
+
+              
+              <!--<pre>item passed to partial is = <%= actionArray %></pre>-->
+              <!-- change here putting option according to the loop-->
+              <label for ="instance"> ith instance:</label>
+              <input id = "instance" type="text" name="instance">
+              <br>
+              
+              <label for ="action1"> action1(a):</label>
+              <select name="action1" id="action1">
+              
+              <% for(let i=0;i<actionArray.length; i++){ %>
+
+  
+                <option value="<%= actionArray[i] %>"> <%= actionArray[i] %></option>
+            <% } %>
+                </select>
+                <br>
+
+                <label for ="action2"> replaced with(b):</label>
+                <select name="action2" id="action2">
+
+              <% for(let i=0;i<actionArray.length; i++){ %>
+
+  
+                <option value="<%= actionArray[i] %>"> <%= actionArray[i] %></option>
+            <% } %>
+                </select>
+</body>
+</html>

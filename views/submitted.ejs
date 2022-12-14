@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<style >
+  #left {
+    width: auto;
+    float: left;
+    display: block;
+    background-color: #6899D3;       
+    margin: 0; 
+    padding-top: 0; 
+    white-space: pre-line;
+    font-size: 30px;
+}
+#heading{
+  font-size: 0.1%;
+  /*alignment 
+}
+</style>
+  <head>
+    <title>Result</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body> 
+    <h1>The following is the plan produced by SMTPLAN+ </h1>
+    <div >
+      <p id="heading" > Time(s)  &nbsp;    Action   &nbsp;  &nbsp; Duration(s)</p>
+     <p id = "left"> <%= data %> </p>
+    </div>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<style>
+#c1{
+   float:right;
+   background:yellow;
+   font-size: 20px;
+}
+
+#questions{
+  font-size: 16px;
+}
+</style>
+
+<body>
+
+<!--<h1>The select element</h1>
+
+<p>The select element is used to create a drop-down list.</p> -->
+<div id ="c1">
+<form action="/sub" method="post">
+  <label for="questions">Choose a contrastive question:</label>
+  <select name="questions" id="questions">
+    <option value="q1">Replacing an Action by Another</option>
+    <option value="q2">Restricting an Action to Appear After a certain time</option>
+    <option value="q3">Restricting an Action to Appear Before a certain time</option>
+    <option value="q4">Barring an Action from Appearing</option>
+    <option value="q5">Restricting an Action to occur less than certain number of time</option>
+    <option value="q6">Questioning the optimality of Plan Duration</option>
+    <option value="q7">Question on the sequence of Action</option>
+    <option value="q8">Questioning the optimality of Plan Length</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+</div>
+<!--<p id="c1">Click the "Submit" button and the form-data will be sent to a url "submit"</p>-->
+
+</body>
+</html>

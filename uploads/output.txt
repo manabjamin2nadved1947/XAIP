@@ -1,0 +1,2 @@
+0.0:	(refuel gen tank1) [0.0]
+64.0:	(generate gen) [1000.0]

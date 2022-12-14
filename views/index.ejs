@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <h2><%= title %></h2>
+    <img src="images/ai_planning.jpeg"  width="200" height="200">
+    <p>In artificial intelligence planning, having an explanation of a plan given by a planner is often desirable. The ability to explain various aspects of a synthesized plan to an end-user not only brings in trust in the planner but also reveals insights into the planning domain and the planning process. Contrastive questions such as “Why action A instead of action B?” can be answered with a contrastive explanation that compares the properties of the original plan containing A against the contrastive plan containing B. In our work, we explore a set of contrastive questions that a user of a planning tool may raise and we propose a re-model and re-plan framework to provide explanations to such questions. We have used PDDL+, a planning domain definition language to describe planning instances of hybrid systems which model a mix of discrete-continuous dynamics. Specifically, given a mixed discrete-continuous system model in PDDL+ and a plan describing the set of desirable actions on the same to achieve a destined goal, we present a framework that can integrate contrastive questions in PDDL+ and synthesize alternate plans. We compare the original plan with the alternate ones to generate an explanation.</p>
+    <form action="submit" method="POST" enctype="multipart/form-data">
+      <label>Domain file</label>
+      <input name="file1" type="file">
+
+      <label>Problem File</label>
+      <input name="file2" type="file">
+
+      <br><br>
+      <input type="submit">
+
+    </form>
+  </body>
+</html>

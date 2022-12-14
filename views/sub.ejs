@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
+    <title>Sub</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!--<h1>horray, selected item Is <%= item %></h1>-->
+    <div>
+      
+
+        <% switch (item) {
+            case "q1": %>
+            <!--<p> do something in q1</p>
+            <form action="/sub" method="get">
+              <label for ="instance"> ith instance:</label>
+              <input id = "instance" type="text" name="instance">
+
+              <label for ="action1"> action1(a):</label>
+              <input id = "action1" type="text" name="action1">
+
+              <label for ="action2"> replaced with(b):</label>
+              <input id = "action2" type="text" name="action2">
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              <input type="submit" value="Submit">
+            </form>-->
+
+          <h1>The selected contrastive quesion is: Replacing an Action by Another in the Plan</h1>
+            <form action="/sub" method="get">
+              
+              <label for ="action"> action:</label>
+              <%-include('showq1',{actionArray:actionArray}); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              <input type="submit" value="Submit">
+            <% if(submitted) {%>
+          <p>  <%=instance %>th instance of action "a" is <i><%=  action1%></i>
+            , replaced with <i><%= action2%></i> "b" action</p>
+            <br> <br>
+            <pre><%= stdout%></pre>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+              
+              
+        <% break;
+            case "q2": %>
+          <h1>The selected contrastive quesion is: Restricting an Action to Appear After a Certain Time</h1>
+            <form action="/sub" method="get">
+
+              <%-include('showq2_q3',{actionArray:actionArray}); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              <input type="submit" value="Submit">
+            <% if(submitted) {%>
+            
+             <p>action is <i><%=  action%></i>, appears AFTER <i><%= time%></i> seconds</p>
+           
+            <pre><%= stdout%></pre>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+        <% break;
+            case "q3": %>
+              <h1>The selected contrastive quesion is: Restricting an Action to Appear Before a Certain Time</h1>
+            <form action="/sub" method="get">
+
+              <%-include('showq2_q3',{actionArray:actionArray}); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              <input type="submit" value="Submit">
+            <% if(submitted) {%>
+            
+             <p>action is <i><%=  action%></i>, appears BEFORE <i><%= time%></i> seconds</p>
+           
+            <pre><%= stdout%></pre>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+        <% break;
+            case "q4": %>
+            <h1>The selected contrastive quesion is: Barring an Action from Appearing</h1>
+              <p> select the action that is to be barred to appear in the plan</p>
+              <form action="/sub" method="get">
+              
+
+              <label for ="action"> action:</label>
+              <!--<input id = "action" type="text" name="action">-->
+              <!-- code for select here-->
+              <!-- or show.ejs-->
+              <%= //JSON.stringify(actionArray) %>
+              <%-include('show',{actionArray:actionArray}); %>
+              
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              <input type="submit" value="Submit">
+            </form>
+            <% if(submitted) {%>
+            <p> Why planner chooses action "a" (<i><%=  actions%></i>) ?</p>
+            <% if (stdout ==null) {%>
+            <p>sorry mate, no plan available</p>
+            <% } else{ %>
+            <pre> <%= stdout %></pre>
+            <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+        <% break;
+          
+            case "q5": %>
+             <h1>The selected contrastive quesion is: Restricting an Action to occur less than certain number of time</h1>
+            <form action="/sub" method="get">
+
+              <%-include('showq5',{actionArray:actionArray}); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              <input type="submit" value="Submit">
+            <% if(submitted) {%>
+            
+             <p>action <i><%=  action%></i>, must occur less than <i><%= occ_time%></i> times</p>
+           
+            <pre><%= stdout%></pre>
+            <% } else { %>
+            <p></p>
+            <% }%>
+        <% break;
+          case "q6": %>
+              <p> do something in q6</p>
+        <% break;
+            case "q7": %>
+              <p> do something in q7</p>
+        <% break;
+          case "q8": %>
+              <p> do something in q8</p>
+                                
+
+              <p><% //var item = item%>
+              <% //console.log(`item is in q8: ${item}`) %> 
+                <%- //include('show',{item: item}); %></p>
+              
+              <p></p>
+               
+              <p>
+                <% var file1= JSON.stringify(global.file1.name) %>
+                <%=// file1 = file1.slice(1,-6) %>
+                
+                <br>
+                <% var file2 = JSON.stringify(global.file2.name) %>
+                <%= //file2 = file2.slice(1,-6) %>
+                
+              </p>
+        <% break;
+            default: %>
+            <p>sorry mate</p>
+          
+        <% break; } %>
+    </div>
+
+    <div>
+      <%// var data = JSON.stringify(data) %>
+      <p><%= //data%></p>
+      <% //Object.entries(this.data).forEach(([key, value]) => {  %>
+        <!--<p> key = <%= //`${key}:`%> ; value = <%= //`${value}:`%> </p>-->
+      <% //})%>
+    </div>
+  </body>
+</html>
