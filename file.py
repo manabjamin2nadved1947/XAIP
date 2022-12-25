@@ -19,8 +19,8 @@ class Stack:
 S= deque()	
 pattern  = r"^[^\(  \)]+" #any string until ( or )
 
-
-with open('myfile.txt','r') as f:
+domain_file = sys.argv[2]
+with open(domain_file,'r') as f:
 	txt = f.readlines()
 
 #print(txt)
@@ -79,7 +79,7 @@ for x in txt:
 	print(x)
 
 #write modified domain in the file
-with open('newfile.pddl','w+') as file:
+with open('modified_q4_domain.pddl','w+') as file:
 	file.writelines(txt)		
 
 """

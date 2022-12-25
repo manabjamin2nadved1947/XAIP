@@ -14,5 +14,5 @@
 
 		(safe gen)
      )  
-     (:goal (generator-ran))
+     (:goal (and (generator-ran) (< (running_time) 3000)) )
 )

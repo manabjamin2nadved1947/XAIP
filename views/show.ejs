@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html>
 
-</script>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>show</title>
-</head>
-<body>
+
     <p id="pass">
                 <% //var file1= JSON.stringify(global.file1.name) %>
                 <%= //file1 = file1.slice(1,-6) %>
@@ -17,11 +9,10 @@
                 <%= //file2 = file2.slice(1,-6) %>
                 
               </p>
-
-              
-              <!--<pre>item passed to partial is = <%= actionArray %></pre>-->
-              <!-- change here putting option according to the loop-->
-              <select name="actions" id="actions">
+               <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">action</label>
+                        <div class="col-sm-10">
+              <select name="actions" id="actions" class="form-select" aria-label="Default select example">
               <% for(let i=0;i<actionArray.length; i++){ %>
 
   
@@ -29,5 +20,14 @@
             <% } %>
     
   </select>
-</body>
-</html>
+                        </div>
+                      </div>
+
+                       <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                          <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+   
+      

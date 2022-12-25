@@ -2,8 +2,8 @@
 (:requirements :fluents :durative-actions :duration-inequalities :adl :typing :time :negative-preconditions)
 (:types generator tank)
 (:predicates (generator-ran) (available ?t - tank) (using ?t - tank ?g - generator) (safe ?g - generator) (generatorStarted ?g - generator))
-(:functions (fuelLevel ?g - generator) (capacity ?g - generator) (fuelInTank ?t - tank) (ptime ?t - tank) (dur ?g - generator) )
-(:action generateStart
+(:functions (fuelLevel ?g - generator) (capacity ?g - generator) (fuelInTank ?t - tank) (ptime ?t - tank) (dur ?g - generator) (running_time) )
+(:action generatestart
  :parameters (?g - generator)
  :precondition (and (not (generatorStarted ?g)) (>= (fuelLevel ?g) 0) (safe ?g))
  :effect (and (generatorStarted ?g) (assign (dur ?g) 0) )
@@ -20,7 +20,7 @@
                     (not (>= (fuelLevel ?g) 0)) )
  :effect (and (assign (dur ?g) 1001) )
 )
-(:action generateEnd
+(:action generateend
  :parameters (?g - generator)
  :precondition (and (generatorStarted ?g) (>= (fuelLevel ?g) 0) (safe ?g) (= (dur ?g) 1000) )
  :effect (and (generator-ran) (not (generatorStarted ?g)) )
@@ -46,5 +46,11 @@
  :parameters (?g - generator)
  :precondition (and (> (fuelLevel ?g) (capacity ?g)) (safe ?g))
  :effect (and (not (safe ?g)))
+)
+
+(:process clock
+ :parameters (?g -generator)
+ :precondition (and (safe ?g))
+ :effect (and (increase (running_time) (* #t 1)) )        
 )
 )

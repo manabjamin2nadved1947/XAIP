@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
         else{
             //console.log(stdout);
             //res.send(stdout);
-            var data = fs.readFileSync('output.txt', 'utf8')
+            global.data = fs.readFileSync('output.txt', 'utf8')
         //console.log(data);
          res.render('submitted',{data})
         }

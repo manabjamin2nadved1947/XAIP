@@ -1,10 +1,12 @@
 import sys
 
-f = open('car_domain_nodrag.pddl')
-domain = f.read()
-
 action = sys.argv[1]
+action = "(:action " + action
 time = sys.argv[2]
+domain_file =sys.argv[3]
+#problem_file = sys.argv[4]
+f = open(domain_file)
+domain = f.read()
 
 new_action = f'{action}{time}'
 

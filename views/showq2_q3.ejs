@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html>
 
-</script>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>show</title>
-</head>
-<body>
-    
               
               <!--<pre>item passed to partial is = <%= actionArray %></pre>-->
               <!-- change here putting option according to the loop-->
               <!--<label for ="instance"> ith instance:</label>
               <input id = "instance" type="text" name="instance">-->
-              <br>
-              
-              <label for ="action"> action</label>
-              <select name="action" id="action">
+            <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="action">action</label>
+                        <div class="col-sm-10">
+                          
+                          <select name="action" id="action"  class="form-select" aria-label="Default select example">
+                
+
               
               <% for(let i=0;i<actionArray.length; i++){ %>
 
@@ -25,9 +18,20 @@
                 <option value="<%= actionArray[i] %>"> <%= actionArray[i] %></option>
             <% } %>
                 </select>
+                </div>
+                      </div>
                 <br>
-                
-                <label for ="time"> appears before/after time(sec) </label>
-              <input id = "time" type="text" name="time">
-</body>
-</html>
+                <div class="row mb-3">
+                <label for ="time" class="col-sm-2 col-form-label"> appears before/after time(sec) </label>
+                <div class="col-sm-10">
+              <input  class="form-control" id = "time" type="text" name="time">
+          </div>
+      </div>
+
+      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                          <button type="submit" class="btn btn-primary">Submit Form</button>
+                        </div>
+                      </div>
+      

@@ -20,6 +20,11 @@
   :effect (and (increase (a) 1))
 )
 
+(:action decelerate
+  :parameters()
+  :precondition (and (running) (> (a) (down_limit)))
+  :effect (and (decrease (a) 1))
+)
 
 (:event engineExplode
 :parameters ()
@@ -34,6 +39,5 @@
 )
 
 )
-
 
 

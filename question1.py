@@ -61,8 +61,11 @@ b= sys.argv[3]
 domain_file = sys.argv[4]
 problem_file = sys.argv[5]
 #number of line preceding ith action
-j=[j for j, n in enumerate(actionList) if n==action][i] #replace 1 with i
+try:
 
+	j=[j for j, n in enumerate(actionList) if n==action][i] #replace 1 with i
+except:
+	print("action is not matching")
 #print(f'{action} is in line {j+1}')
 
 #appending upto i-1th element
@@ -192,11 +195,18 @@ print("*"*50)
 #add action b 
 b_name = f'{b}_{count+1}'
 predicates_list.append(b_name)
-pre = f'and (not (has_done_{b_name})) (has_done_{rename})'
-eff = f'and (has_done_{b_name})'
+try:
+	pre = f'and (not (has_done_{b_name})) (has_done_{rename})'
+	eff = f'and (has_done_{b_name})'
+except NameError:
+	pre = f'and (not (has_done_{b_name}))'
+	eff = f'and (has_done_{b_name})'
+	t=copy_action(domain,b,f'{b}_{count+1}',pre,eff)
+	domain = domain+'\n'+t
 #no problem in this assignment
-t=copy_action(domain,b,f'{b}_{count+1}',pre,eff)
-domain = domain+'\n'+t
+else:
+	t=copy_action(domain,b,f'{b}_{count+1}',pre,eff)
+	domain = domain+'\n'+t
 
 #modify predicates
 #search for predicates to change

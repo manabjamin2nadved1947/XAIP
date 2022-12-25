@@ -1,11 +1,14 @@
 import sys
 
-f = open('car_domain_nodrag.pddl')
+action = sys.argv[1]
+action = "(:action " + action
+occur_time = sys.argv[2]
+domain_file = sys.argv[3]
+problem_file = sys.argv[4]
+f = open(domain_file)
 domain = f.read()
 
 
-action = sys.argv[1]
-occur_time = sys.argv[2]
 
 
 #add predicate to the effect
@@ -38,7 +41,7 @@ with open('modified_q5_domain.pddl','w+') as file:
 
 #add predicate to the goal state of problem file 
 #change in problem file
-f = open('car_prob01.pddl')
+f = open(problem_file)
 problem = f.read()
 
 

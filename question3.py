@@ -2,12 +2,15 @@ import re
 import sys
 from collections import deque  
 
-
-f = open('car_domain_nodrag.pddl')
+action = sys.argv[1]
+#action = "(:action " + action
+time = sys.argv[2]
+domain_file = sys.argv[3]
+problem_file = sys.argv[4]
+f = open(domain_file)
 domain = f.read()
 
-action = sys.argv[1]
-time = sys.argv[2]
+
 
 new_action = f'{action}{time}'
 
@@ -108,12 +111,13 @@ temp = copy_action(domain, action,new_action,pre,eff)
 domain = domain+'\n'+temp
 domain = domain +")"
 
+print(domain)
 #write modified domain in the file
 with open('modified_q3_domain.pddl','w+') as file:
 	file.writelines(domain)	
 
 #change in problem file
-f = open('car_prob01.pddl')
+f = open(problem_file)
 problem = f.read()
 
 

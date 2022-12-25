@@ -4,15 +4,15 @@
 (:functions (d) (v) (a) (up_limit) (down_limit) (running_time) )
 (:process moving
 :parameters ()
-:precondition (and (> (running_time) 1) (running))
+:precondition (and (running))
 :effect (and (increase (v) (* #t (a)))
              (increase (d) (* #t (v)))
 	     (increase (running_time) (* #t 1))
 )
 )
-(:action accelerate
+(:action accelerate5
   :parameters()
-  :precondition (and (running) (< (a) (up_limit)))
+  :precondition (and (> (running_time) 5) (running) (< (a) (up_limit)))
   :effect (and (increase (a) 1))
 )
 (:action decelerate

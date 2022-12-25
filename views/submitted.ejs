@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<style >
+<!--<style >
   #left {
     width: auto;
     float: left;
@@ -11,27 +11,8 @@
     white-space: pre-line;
     font-size: 30px;
 }
-#heading{
-  font-size: 0.1%;
-  /*alignment 
-}
-</style>
-  <head>
-    <title>Result</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body> 
-    <h1>The following is the plan produced by SMTPLAN+ </h1>
-    <div >
-      <p id="heading" > Time(s)  &nbsp;    Action   &nbsp;  &nbsp; Duration(s)</p>
-     <p id = "left"> <%= data %> </p>
-    </div>
-  </body>
-</html>
 
-<!DOCTYPE html>
-<html>
-<style>
+
 #c1{
    float:right;
    background:yellow;
@@ -41,31 +22,93 @@
 #questions{
   font-size: 16px;
 }
-</style>
+</style>-->
 
-<body>
 
-<!--<h1>The select element</h1>
+  
+<head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+     <title>Result</title>
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+    
+      <!-- Favicons -->
+      <link href="assets/img/favicon.png" rel="icon">
+      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    
+      <!-- Google Fonts -->
+      <link href="https://fonts.gstatic.com" rel="preconnect">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
+      <!-- Vendor CSS Files -->
+      <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+      <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+      <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    
+      <!-- Template Main CSS File -->
+      <link href="assets/css/style.css" rel="stylesheet">
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+ 
+</head>
 
-<p>The select element is used to create a drop-down list.</p> -->
-<div id ="c1">
-<form action="/sub" method="post">
-  <label for="questions">Choose a contrastive question:</label>
-  <select name="questions" id="questions">
-    <option value="q1">Replacing an Action by Another</option>
-    <option value="q2">Restricting an Action to Appear After a certain time</option>
-    <option value="q3">Restricting an Action to Appear Before a certain time</option>
-    <option value="q4">Barring an Action from Appearing</option>
-    <option value="q5">Restricting an Action to occur less than certain number of time</option>
-    <option value="q6">Questioning the optimality of Plan Duration</option>
-    <option value="q7">Question on the sequence of Action</option>
-    <option value="q8">Questioning the optimality of Plan Length</option>
-  </select>
-  <br><br>
-  <input type="submit" value="Submit">
-</form>
+
+  <body>
+
+          
+           <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <h5 class="card-title">The following is the plan produced by SMTPLAN+</h5>
+
+              <nav >
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">Time</li>
+                  <li class="breadcrumb-item">Action</li>
+                  <li class="breadcrumb-item active">Duration</li>
+                </ol>
+              </nav>
+
+              <pre > <%= data %> </pre>
 </div>
-<!--<p id="c1">Click the "Submit" button and the form-data will be sent to a url "submit"</p>-->
+            
+          
+
+
+
+<!--<p>Choose a contrastive question:</p>-->
+<div class="float-md-right">
+<form action="/sub" method="post">
+  <div class="btn-group">
+  <button class="btn btn-secondary btn-lg btn-danger"  type="button" data-toggle="dropdown" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false"for="questions">Choose a contrastive question:</button>
+
+
+  <select name="questions" id="questions" class="float-md-right">
+    <option value="q1" class="dropdown-item">Replacing an Action by Another</option>
+    <option value="q2" class="dropdown-item">Restricting an Action to Appear After a certain time</option>
+    <option value="q3" class="dropdown-item">Restricting an Action to Appear Before a certain time</option>
+    <option value="q4" class="dropdown-item">Barring an Action from Appearing</option>
+    <option value="q5" class="dropdown-item">Restricting an Action to occur less than certain number of time</option>
+    <option value="q6" class="dropdown-item">Questioning the optimality of Plan Duration</option>
+    <option value="q7" class="dropdown-item">Question on the sequence of Action</option>
+    <option value="q8" class="dropdown-item">Questioning the optimality of Plan Length</option>
+  </select>
+</div>
+  <br><br>
+
+<button type="submit" class="btn btn-outline-danger">Submit</button>
+                        
+
+
+  
+</form>
+
+</div>
+
+
 
 </body>
 </html>

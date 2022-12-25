@@ -1,135 +1,345 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
-
-    <title>Sub</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
+    <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+      <title>ar koto pore?</title>
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+    
+      <!-- Favicons -->
+      <link href="assets/img/favicon.png" rel="icon">
+      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    
+      <!-- Google Fonts -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+      <link href="https://fonts.gstatic.com" rel="preconnect">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
+      <!-- Vendor CSS Files -->
+      <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+      <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+      <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    
+      <!-- Template Main CSS File -->
+      <link href="assets/css/style.css" rel="stylesheet">
+    
+      <!-- =======================================================
+      * Template Name: NiceAdmin - v2.5.0
+      * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      * Author: BootstrapMade.com
+      * License: https://bootstrapmade.com/license/
+      ======================================================== -->
+    </head>
   <body>
-    <!--<h1>horray, selected item Is <%= item %></h1>-->
+    
     <div>
       
 
         <% switch (item) {
             case "q1": %>
-            <!--<p> do something in q1</p>
+            
+          <h1></h1>
             <form action="/sub" method="get">
-              <label for ="instance"> ith instance:</label>
-              <input id = "instance" type="text" name="instance">
-
-              <label for ="action1"> action1(a):</label>
-              <input id = "action1" type="text" name="action1">
-
-              <label for ="action2"> replaced with(b):</label>
-              <input id = "action2" type="text" name="action2">
-              <input type="hidden" name="questions" value = "<%= item %>" >
-              <input type="submit" value="Submit">
-            </form>-->
-
-          <h1>The selected contrastive quesion is: Replacing an Action by Another in the Plan</h1>
-            <form action="/sub" method="get">
-              
+              <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive question is: Replacing an Action by Another in the Plan</h2>
               <label for ="action"> action:</label>
-              <%-include('showq1',{actionArray:actionArray}); %>
+              <%-include('showq1',{actionArray:actionArray, input: input }); %>
               <br>
               <input type="hidden" name="questions" value = "<%= item %>" >
-              <input type="submit" value="Submit">
+  
+
             <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
           <p>  <%=instance %>th instance of action "a" is <i><%=  action1%></i>
             , replaced with <i><%= action2%></i> "b" action</p>
             <br> <br>
-            <pre><%= stdout%></pre>
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            
+            <% } else {%>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+      
+              <% } %>
             <% } else { %>
             <p></p>
             <% }%>
+                  </div>
+                  </div>
+          </form>
 
               
               
         <% break;
             case "q2": %>
-          <h1>The selected contrastive quesion is: Restricting an Action to Appear After a Certain Time</h1>
+            <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Restricting an Action to Appear After a Certain Time</h2>
             <form action="/sub" method="get">
 
               <%-include('showq2_q3',{actionArray:actionArray}); %>
               <br>
               <input type="hidden" name="questions" value = "<%= item %>" >
-              <input type="submit" value="Submit">
-            <% if(submitted) {%>
-            
-             <p>action is <i><%=  action%></i>, appears AFTER <i><%= time%></i> seconds</p>
+             </form>
+             
            
-            <pre><%= stdout%></pre>
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+           <p>action is <i><%=  action%></i>, appears AFTER <i><%= time%></i> seconds</p>
+             
+            <br> <br>
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            
+            <% } else {%>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+      
+              <% } %>
             <% } else { %>
             <p></p>
             <% }%>
+                  </div>
+                  </div>
+          </form>
 
+              
+              
         <% break;
             case "q3": %>
-              <h1>The selected contrastive quesion is: Restricting an Action to Appear Before a Certain Time</h1>
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Restricting an Action to Appear Before a Certain Time</h2>
             <form action="/sub" method="get">
 
               <%-include('showq2_q3',{actionArray:actionArray}); %>
               <br>
               <input type="hidden" name="questions" value = "<%= item %>" >
-              <input type="submit" value="Submit">
+              
             <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+           <p>action is <i><%=  action%></i>, appears BEFORE <i><%= time%></i> seconds</p>
+             
+            <br> <br>
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
             
-             <p>action is <i><%=  action%></i>, appears BEFORE <i><%= time%></i> seconds</p>
-           
-            <pre><%= stdout%></pre>
+            <% } else {%>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+      
+              <% } %>
             <% } else { %>
             <p></p>
             <% }%>
+                  </div>
+                  </div>
+          </form>
 
+              
+              
         <% break;
             case "q4": %>
-            <h1>The selected contrastive quesion is: Barring an Action from Appearing</h1>
-              <p> select the action that is to be barred to appear in the plan</p>
-              <form action="/sub" method="get">
+            
               
+              <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Barring an Action from Appearing</h2>
+              <form action="/sub" method="get">
+              <p> select the action that is to be barred to appear in the plan</p>
 
-              <label for ="action"> action:</label>
-              <!--<input id = "action" type="text" name="action">-->
-              <!-- code for select here-->
-              <!-- or show.ejs-->
-              <%= //JSON.stringify(actionArray) %>
+              
+              
+              
               <%-include('show',{actionArray:actionArray}); %>
               
               <input type="hidden" name="questions" value = "<%= item %>" >
-              <input type="submit" value="Submit">
+              
             </form>
             <% if(submitted) {%>
-            <p> Why planner chooses action "a" (<i><%=  actions%></i>) ?</p>
-            <% if (stdout ==null) {%>
-            <p>sorry mate, no plan available</p>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
             <% } else{ %>
             <pre> <%= stdout %></pre>
             <% } %>
             <% } else { %>
             <p></p>
             <% }%>
-        <% break;
+
+             </div>
+      </div>
+    </div>
           
+        <% break;
+       
             case "q5": %>
-             <h1>The selected contrastive quesion is: Restricting an Action to occur less than certain number of time</h1>
+            <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Restricting an Action to occur less than certain number of time</h2>
             <form action="/sub" method="get">
 
               <%-include('showq5',{actionArray:actionArray}); %>
               <br>
               <input type="hidden" name="questions" value = "<%= item %>" >
               <input type="submit" value="Submit">
+
+                 </form>
             <% if(submitted) {%>
-            
+             <i class="bi bi-star me-1"></i> 
              <p>action <i><%=  action%></i>, must occur less than <i><%= occ_time%></i> times</p>
-           
-            <pre><%= stdout%></pre>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            <% } else{ %>
+            <pre> <%= stdout %></pre>
+            <% } %>
             <% } else { %>
             <p></p>
             <% }%>
+
+             </div>
+      </div>
+    </div>
+          
         <% break;
           case "q6": %>
-              <p> do something in q6</p>
+              
+             <h1>The selected contrastive quesion is: Questioning the optimality of Plan Duration</h1>
+            <form action="/sub" method="get">
+              <label for ="plan_duration"> plan_duration:</label>
+              <input id = "plan_duration" type="text" name="plan_duration">
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              <input type="submit" value="Submit">
+              
+          </form>
+            <% if(submitted) {%>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            <% } else{ %>
+            <pre> <%= stdout %></pre>
+            <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+             </div>
+      </div>
+    </div>
+          
         <% break;
             case "q7": %>
               <p> do something in q7</p>
@@ -167,5 +377,7 @@
         <!--<p> key = <%= //`${key}:`%> ; value = <%= //`${value}:`%> </p>-->
       <% //})%>
     </div>
+
+   
   </body>
 </html>
