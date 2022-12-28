@@ -57,8 +57,8 @@
 
             <% if(submitted) {%>
             <i class="bi bi-star me-1"></i>
-          <p>  <%=instance %>th instance of action "a" is <i><%=  action1%></i>
-            , replaced with <i><%= action2%></i> "b" action</p>
+          <p>  <%=instance %>th instance of action is <i><%=  action1%></i>
+            , replaced with <i><%= action2%></i>  action</p>
             <br> <br>
             <% if (stdout == "sorry mate! No plan") {%>
             <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
@@ -255,8 +255,7 @@
                   <div class="card-body">
                     <h2 class="card-title">The selected contrastive quesion is: Barring an Action from Appearing</h2>
               <form action="/sub" method="get">
-              <p> select the action that is to be barred to appear in the plan</p>
-
+             
               
               
               
@@ -266,12 +265,49 @@
               
             </form>
             <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+            <p> action <%= actions %> is barred to appear in the plan</p>
               <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 
             <% if (stdout == "sorry mate! No plan") {%>
             <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
             <% } else{ %>
-            <pre> <%= stdout %></pre>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
             <% } %>
             <% } else { %>
             <p></p>
@@ -292,7 +328,7 @@
               <%-include('showq5',{actionArray:actionArray}); %>
               <br>
               <input type="hidden" name="questions" value = "<%= item %>" >
-              <input type="submit" value="Submit">
+          
 
                  </form>
             <% if(submitted) {%>
@@ -303,7 +339,42 @@
             <% if (stdout == "sorry mate! No plan") {%>
             <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
             <% } else{ %>
-            <pre> <%= stdout %></pre>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>            
             <% } %>
             <% } else { %>
             <p></p>
@@ -315,22 +386,71 @@
           
         <% break;
           case "q6": %>
-              
-             <h1>The selected contrastive quesion is: Questioning the optimality of Plan Duration</h1>
+              <div class="card">
+                  <div class="card-body">
+             <h2 class="card-title">The selected contrastive quesion is: Questioning the optimality of Plan Duration</h2>
             <form action="/sub" method="get">
-              <label for ="plan_duration"> plan_duration:</label>
-              <input id = "plan_duration" type="text" name="plan_duration">
-              <input type="hidden" name="questions" value = "<%= item %>" >
-              <input type="submit" value="Submit">
+                <div class="row mb-3">
+                <label for ="plan_duration" class="col-sm-2 col-form-label"> Plan duration</label>
+                <div class="col-sm-10">
+              <input  class="form-control" id = "plan_duration" type="text" name="plan_duration">
+          </div>
+      </div>
+ 
+             
+        <input type="hidden" name="questions" value = "<%= item %>" >
+                               <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                          <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
               
           </form>
             <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+            <p>Plan duration must be less than <%= plan_duration%></p>
               <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 
             <% if (stdout == "sorry mate! No plan") {%>
             <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
             <% } else{ %>
-            <pre> <%= stdout %></pre>
+                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
             <% } %>
             <% } else { %>
             <p></p>
@@ -345,24 +465,79 @@
               <p> do something in q7</p>
         <% break;
           case "q8": %>
-              <p> do something in q8</p>
-                                
-
-              <p><% //var item = item%>
-              <% //console.log(`item is in q8: ${item}`) %> 
-                <%- //include('show',{item: item}); %></p>
+              <div class="card">
+                  <div class="card-body">
+             <h2 class="card-title">The selected contrastive quesion is: Questioning the optimality of Plan Length</h2>
+            <form action="/sub" method="get">
+                <div class="row mb-3">
+                <label for ="plan_length" class="col-sm-2 col-form-label"> Plan length less than </label>
+                <div class="col-sm-10">
+              <input  class="form-control" id = "plan_length" type="text" name="plan_length">
+          </div>
+      </div>
+ 
+             
+        <input type="hidden" name="questions" value = "<%= item %>" >
+                               <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                          <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
               
-              <p></p>
-               
-              <p>
-                <% var file1= JSON.stringify(global.file1.name) %>
-                <%=// file1 = file1.slice(1,-6) %>
+          </form>
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+            <p>Plan length must be less than <%= plan_length%></p>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            <% } else{ %>
+                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
                 <br>
-                <% var file2 = JSON.stringify(global.file2.name) %>
-                <%= //file2 = file2.slice(1,-6) %>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
                 
-              </p>
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+            <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+             </div>
+      </div>
+    </div>
         <% break;
             default: %>
             <p>sorry mate</p>

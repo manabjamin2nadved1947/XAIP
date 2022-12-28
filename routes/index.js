@@ -104,11 +104,13 @@ router.get('/sub',(req,res,next)=>{
       else{
         console.log(stdout);
 
+        var a = false;
          const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q1_domain.pddl', 'modified_q1_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
       else{
+        a = true;
         console.log(stdout);
 
         res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, input: req.query, submitted: true}}) //spread 
@@ -117,7 +119,14 @@ router.get('/sub',(req,res,next)=>{
 
       }
 
+             const myTimeout = setTimeout(myError, 1000);
+      function myError() {
+        var msg = "sorry mate! No plan"; 
+        if (a== false) {
+          res.render('sub',{...{item: req.query.questions, stdout: msg,  ...req.query, submitted: true}}) //spread 
 
+        }
+      }
     })
 
    
@@ -149,7 +158,7 @@ router.get('/sub',(req,res,next)=>{
 
       const myTimeout = setTimeout(myError, 1000);
       function myError() {
-        var msg = "sorry mate!"; 
+        var msg = "sorry mate! No plan"; 
         if (a== false) {
           res.render('sub',{...{item: req.query.questions, stdout: msg,  ...req.query, submitted: true}}) //spread 
 
@@ -186,7 +195,7 @@ router.get('/sub',(req,res,next)=>{
 
       const myTimeout = setTimeout(myError, 1000);
       function myError() {
-        var msg = "sorry mate! no alternate plan found"; 
+        var msg = "sorry mate! No plan"; 
         if (a== false) {
           res.render('sub',{...{item: req.query.questions, stdout: msg,  ...req.query, submitted: true}}) //spread 
 
@@ -318,8 +327,45 @@ router.get('/sub',(req,res,next)=>{
     
   }
 
-  /*question 8*/
+  /*question 7*/
 
+
+  /*question 8*/
+if(req.query.questions == 'q8'){
+    const python = execFile('python3',['question8.py',req.query.plan_length, './uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+      if (error){
+        throw error
+      }
+      else{
+        console.log(stdout);
+        var a = false;
+        const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q8_domain.pddl', 'modified_q8_problem.pddl'], (error,stdout,stderror)=>{
+      if(error){
+        throw error;
+      }
+      else{
+        a = true;
+        console.log(stdout);
+
+        res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
+      }
+    })
+
+      }
+
+       const myTimeout = setTimeout(myError, 1000);
+      function myError() {
+        var msg = "sorry mate! No plan"; 
+        if (a== false) {
+          res.render('sub',{...{item: req.query.questions, stdout: msg,  ...req.query, submitted: true}}) //spread 
+
+        }
+      }
+
+    })
+
+    
+  }
 
   
   
