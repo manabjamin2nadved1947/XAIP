@@ -49,7 +49,7 @@ for i in range(len(txt1)):
 print(actionList)
 
 #remove parentheses from the actionList
-pattern = r'[\( \)]'
+pattern = r'[\( \)]' 
 for i in range(len(actionList)):
 	temp = re.sub(pattern,"",actionList[i])
 	actionList[i]=temp

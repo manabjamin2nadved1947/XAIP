@@ -213,7 +213,7 @@ router.get('/sub',(req,res,next)=>{
   if (req.query.questions == 'q4'){
     //console.log("\n I will surely solve it\n")
     /*run the python code here to get contrastive plan*/
-    const python = execFile('python3',['file.py',req.query.actions, './uploads/'+global.file1.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['question4.py',req.query.actions, './uploads/'+global.file1.name],(error, stdout, stderror)=>{
         if(error){
             throw error
         }

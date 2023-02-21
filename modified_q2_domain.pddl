@@ -10,14 +10,14 @@
 	     (increase (running_time) (* #t 1))
 )
 )
-(:action accelerate5
+(:action accelerate
   :parameters()
-  :precondition (and (> (running_time) 5) (running) (< (a) (up_limit)))
+  :precondition (and (running) (< (a) (up_limit)))
   :effect (and (increase (a) 1))
 )
-(:action decelerate
+(:action decelerate1
   :parameters()
-  :precondition (and (running) (> (a) (down_limit)))
+  :precondition (and (> (running_time) 1) (running) (> (a) (down_limit)))
   :effect (and (decrease (a) 1))
 )
 (:event engineExplode

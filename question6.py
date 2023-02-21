@@ -7,7 +7,7 @@ f = open(problem_file)
 problem = f.read()
 
 #find runnning time
-runpos = problem.find("(<= (running_time)")
+runpos = problem.find("(<= (running_time)") 
 s1 = problem[runpos:]
 res = re.sub(r'\d+', plan_duration, s1)
 
