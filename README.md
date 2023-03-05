@@ -36,3 +36,6 @@ Once the dependencies are installed, you can start the application using the fol
 This will start the Node.js server and the application will be accessible at `http://localhost:3000`.
 
 
+## Note 
+
+Try domain/problem files from Uploads folder to run the Web-service efficiently
