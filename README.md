@@ -1,7 +1,7 @@
 # A Contrastive Explanation Service for Plans in Hybrid Domains
 <br>
 This project proposes a novel approach for generating optimal
-plans in terms of *makespan* and plan length, by automating and iteratively generating Hypothetical
+plans in terms of _makespan_ and plan length, by automating and iteratively generating Hypothetical
 models. The proposed approach consists of three main steps:
 (1) the automation of Hmodel generation, (2) the use of an
 iterative model to obtain an optimal plan, and (3) the use of
