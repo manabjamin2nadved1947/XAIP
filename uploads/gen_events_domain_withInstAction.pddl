@@ -47,10 +47,9 @@
  :precondition (and (> (fuelLevel ?g) (capacity ?g)) (safe ?g))
  :effect (and (not (safe ?g)))
 )
-
 (:process clock
  :parameters (?g -generator)
  :precondition (and (safe ?g))
- :effect (and (increase (running_time) (* #t 1)) )        
+ :effect (and (increase (running_time) (* #t 1)) )	      
 )
 )

@@ -1,43 +1,60 @@
-(define (domain car)
-(:requirements :typing :durative-actions :fluents :time :negative-preconditions :timed-initial-literals)
-(:predicates (has_done_accelerate_2) (has_done_accelerate_1) (running) (stopped) (engineBlown) (transmission_fine) (goal_reached) )
-(:functions (d) (v) (a) (up_limit) (down_limit) (running_time) )
-(:process moving
-:parameters ()
-:precondition (and (running))
-:effect (and (increase (v) (* #t (a)))
-             (increase (d) (* #t (v)))
-	     (increase (running_time) (* #t 1))
+(define (domain generatorplus)
+(:requirements :fluents :durative-actions :duration-inequalities :adl :typing :time :negative-preconditions)
+(:types generator tank)
+(:predicates (has_done_generatestart_1) (generator-ran) (available ?t - tank) (using ?t - tank ?g - generator) (safe ?g - generator) (generatorStarted ?g - generator))
+(:functions (fuelLevel ?g - generator) (capacity ?g - generator) (fuelInTank ?t - tank) (ptime ?t - tank) (dur ?g - generator) (running_time) )
+(:action generatestart
+ :parameters (?g - generator)
+ :precondition (and (has_done_generatestart_1) (not (generatorStarted ?g)) (>= (fuelLevel ?g) 0) (safe ?g))
+ :effect (and (generatorStarted ?g) (assign (dur ?g) 0) )
 )
+(:process generateProcess
+ :parameters (?g - generator)
+ :precondition (and (generatorStarted ?g))
+ :effect (and (decrease (fuelLevel ?g) (* #t 1)) 
+	      (increase (dur ?g) (* #t 1)) )	      
 )
-(:action accelerate
-  :parameters()
-  :precondition (and (has_done_accelerate_2) (running) (< (a) (up_limit)))
-  :effect (and (increase (a) 1))
+(:event generateFail
+ :parameters (?g - generator)
+ :precondition (and (generatorStarted ?g) (not (= (dur ?g) 1000)) 
+                    (not (>= (fuelLevel ?g) 0)) )
+ :effect (and (assign (dur ?g) 1001) )
 )
-(:action decelerate
-  :parameters()
-  :precondition (and (has_done_accelerate_2) (running) (> (a) (down_limit)))
-  :effect (and (decrease (a) 1))
+(:action generateend
+ :parameters (?g - generator)
+ :precondition (and (has_done_generatestart_1) (generatorStarted ?g) (>= (fuelLevel ?g) 0) (safe ?g) (= (dur ?g) 1000) )
+ :effect (and (generator-ran) (not (generatorStarted ?g)) )
 )
-(:event engineExplode
-:parameters ()
-:precondition (and (running) (>= (a) 1) (>= (v) 100))
-:effect (and (not (running)) (engineBlown) (assign (a) 0))
+(:action refuel
+ :parameters (?g - generator ?t - tank)
+ :precondition (and (has_done_generatestart_1) (not (using ?t ?g)) (available ?t))
+ :effect (and (using ?t ?g) (not (available ?t)))
 )
-(:action stop
-:parameters()
-:precondition(and (has_done_accelerate_2) (= (v) 0) (>= (d) 30) (not (engineBlown)) )
-:effect(goal_reached)
+(:process refuelling
+ :parameters (?g - generator ?t -tank)
+ :precondition (and (using ?t ?g))
+ :effect (and (decrease (fuelInTank ?t) (* #t (* 0.001 (* (ptime ?t) (ptime ?t))))) 
+	      (increase (ptime ?t) (* #t 1))
+  	      (increase (fuelLevel ?g) (* #t (* 0.001 (* (ptime ?t) (ptime ?t))))))	      
+)
+(:event tankEmpty
+ :parameters (?g - generator ?t - tank)
+ :precondition (and (using ?t ?g) (<= (fuelInTank ?t) 0))
+ :effect (and (not (using ?t ?g)) )
+)
+(:event generatorOverflow
+ :parameters (?g - generator)
+ :precondition (and (> (fuelLevel ?g) (capacity ?g)) (safe ?g))
+ :effect (and (not (safe ?g)))
+)
+(:process clock
+ :parameters (?g -generator)
+ :precondition (and (safe ?g))
+ :effect (and (increase (running_time) (* #t 1)) )	      
 )
 
-(:action accelerate_1
-  :parameters()
-  :precondition (and (not (has_done_accelerate_1)) (running) (< (a) (up_limit)))
-  :effect (and (has_done_accelerate_1) (increase (a) 1))
-)
-(:action accelerate_2
-  :parameters()
-  :precondition (and (not (has_done_accelerate_2)) (has_done_accelerate_1) (running) (< (a) (up_limit)))
-  :effect (and (has_done_accelerate_2) (increase (a) 1))
+(:action generatestart_1
+ :parameters (?g - generator)
+ :precondition (and (not (has_done_generatestart_1)) (not (generatorStarted ?g)) (>= (fuelLevel ?g) 0) (safe ?g))
+ :effect (and (has_done_generatestart_1) (generatorStarted ?g) (assign (dur ?g) 0) )
 ))

@@ -1,1 +1,1 @@
-{"plan_duration":"10.3","questions":"q6"}
+{"instance":"1","action1":"refuel","action2":"generatestart","questions":"q1"}

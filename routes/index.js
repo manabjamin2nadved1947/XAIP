@@ -299,6 +299,7 @@ router.get('/sub',(req,res,next)=>{
       else{
         console.log(stdout);
         var a = false;
+
         const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['./uploads/'+global.file1.name, 'modified_q6_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;

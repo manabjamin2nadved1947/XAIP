@@ -4,7 +4,7 @@
 		(running)
 		(transmission_fine)
 		(= (running_time) 0)
-		(= (up_limit) 2)
+		(= (up_limit) 1)
 		(= (down_limit) -1)
 		(= d 0)
 		(= a 0)

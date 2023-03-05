@@ -11,6 +11,10 @@ runpos = problem.find("(<= (running_time)")
 s1 = problem[runpos:]
 res = re.sub(r'\d+', plan_duration, s1)
 
+if(runpos == -1):
+	pass
+	#change the goal state
+
 problem = problem[:runpos]+res
 # replace the digit with another
 

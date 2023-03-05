@@ -12,7 +12,7 @@ domain = f.read()
 
 
 
-new_action = f'{action}{time}'
+new_action = f'{action}_new'
 
 #last parenthesis of domain file
 
@@ -95,14 +95,14 @@ pre = f'and (< (running_time) {time})'
 #eff_pos = domain.find("effect", actionPos)
 #search for first "and" after "effect"
 #andpos = domain.find("and",eff_pos+len("effect"))
-eff = f'and (do_before_{time})'
+eff = f'and (do_before_new)'
 #domain = domain[:andpos]+eff+domain[andpos+3:]
 
 #change in predicate
 predicates = domain.find(":predicates",0)
 len_pred = len(":predicates")
 #change predicate 
-predic= f':predicates (do_before_{time})'
+predic= f':predicates (do_before_new)'
 domain =  domain[:predicates]+predic+domain[predicates+len_pred:]
 
 
@@ -126,7 +126,7 @@ goal = problem.find("goal")
 #search for first "and" after "goal"
 andpos = problem.find("and",goal+len("goal"))
 #replace and with the passed predicate
-pre= f'and (do_before_{time})'
+pre= f'and (do_before_new)'
 problem = problem[:andpos]+pre+problem[andpos+3:]
 print()
 print()
