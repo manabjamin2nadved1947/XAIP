@@ -38,4 +38,4 @@ This will start the Node.js server and the application will be accessible at `ht
 
 ## Note 
 
-Try domain/problem files from Uploads folder to run the Web-service efficiently
+Try domain/problem files from [Uploads](https://github.com/manabjamin2nadved1947/XAIP/tree/main/uploads) folder to run the Web-service efficiently
