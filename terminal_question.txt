@@ -1,1 +1,1 @@
-{"instance":"1","action1":"refuel","action2":"generatestart","questions":"q1"}
+{"instance":"1","action1":"accelerate","action2":"decelerate","questions":"q1"}

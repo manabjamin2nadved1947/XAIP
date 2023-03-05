@@ -33,6 +33,6 @@
 
 (:action accelerate_new
   :parameters()
-  :precondition (and (< (running_time) 10) (running) (< (a) (up_limit)))
+  :precondition (and (< (running_time) 30) (running) (< (a) (up_limit)))
   :effect (and (do_before_new) (increase (a) 1))
 ))

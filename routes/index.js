@@ -105,7 +105,7 @@ router.get('/sub',(req,res,next)=>{
         console.log(stdout);
 
         var a = false;
-         const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q1_domain.pddl', 'modified_q1_problem.pddl'], (error,stdout,stderror)=>{
+         const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q1_domain.pddl', 'modified_q1_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -143,7 +143,7 @@ router.get('/sub',(req,res,next)=>{
         console.log(stdout);
 
         var a = false;
-        const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q2_domain.pddl', './uploads/'+global.file2.name], {timeout:100000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q2_domain.pddl', './uploads/'+global.file2.name], {timeout:100000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -180,7 +180,7 @@ router.get('/sub',(req,res,next)=>{
       else{
         console.log(stdout);
         var a = false;
-        const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q3_domain.pddl', 'modified_q3_problem.pddl'], {timeout:12000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q3_domain.pddl', 'modified_q3_problem.pddl'], {timeout:12000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
           if(error){
             throw error;
           }
@@ -223,7 +223,7 @@ router.get('/sub',(req,res,next)=>{
           problem_file = problem_file.slice(1,-6) 
           //console.log(problem_file)
           var a = false;
-          const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q4_domain.pddl', './uploads/'+global.file2.name], (error,stdout,stderror)=>{
+          const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q4_domain.pddl', './uploads/'+global.file2.name], (error,stdout,stderror)=>{
             if(error){
               throw error;
             }
@@ -260,7 +260,7 @@ router.get('/sub',(req,res,next)=>{
       else{
         console.log(stdout);
         var a = false;
-        const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q5_domain.pddl', 'modified_q5_problem.pddl'], (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q5_domain.pddl', 'modified_q5_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -300,7 +300,7 @@ router.get('/sub',(req,res,next)=>{
         console.log(stdout);
         var a = false;
 
-        const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['./uploads/'+global.file1.name, 'modified_q6_problem.pddl'], (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['./uploads/'+global.file1.name, 'modified_q6_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -340,7 +340,7 @@ if(req.query.questions == 'q8'){
       else{
         console.log(stdout);
         var a = false;
-        const smtplan = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan',['modified_q8_domain.pddl', 'modified_q8_problem.pddl'], (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q8_domain.pddl', 'modified_q8_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
