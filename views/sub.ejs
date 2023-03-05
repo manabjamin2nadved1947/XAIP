@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+      <title>ar koto pore?</title>
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+    
+      <!-- Favicons -->
+      <link href="assets/img/favicon.png" rel="icon">
+      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    
+      <!-- Google Fonts -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+      <link href="https://fonts.gstatic.com" rel="preconnect">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
+      <!-- Vendor CSS Files -->
+      <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+      <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+      <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    
+      <!-- Template Main CSS File -->
+      <link href="assets/css/style.css" rel="stylesheet">
+    
+      <!-- =======================================================
+      * Template Name: NiceAdmin - v2.5.0
+      * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      * Author: BootstrapMade.com
+      * License: https://bootstrapmade.com/license/
+      ======================================================== -->
+    </head>
+  <body>
+    
+    <div>
+      
+
+        <% switch (item) {
+            case "q1": %>
+            
+          <h1></h1>
+            <form action="/sub" method="get">
+              <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive question is: Replacing an Action by Another in the Plan</h2>
+              <label for ="action"> action:</label>
+              <%-include('showq1',{actionArray:actionArray, input: input }); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+  
+
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+          <p>  <%=instance %>th instance of action is <i><%=  action1%></i>
+            , replaced with <i><%= action2%></i>  action</p>
+            <br> <br>
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            
+            <% } else {%>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+      
+              <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+                  </div>
+                  </div>
+          </form>
+
+              
+              
+        <% break;
+            case "q2": %>
+            <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Restricting an Action to Appear After a Certain Time</h2>
+            <form action="/sub" method="get">
+
+              <%-include('showq2_q3',{actionArray:actionArray}); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+             </form>
+             
+           
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+           <p>action is <i><%=  action%></i>, appears AFTER <i><%= time%></i> seconds</p>
+             
+            <br> <br>
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            
+            <% } else {%>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+      
+              <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+                  </div>
+                  </div>
+          </form>
+
+              
+              
+        <% break;
+            case "q3": %>
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Restricting an Action to Appear Before a Certain Time</h2>
+            <form action="/sub" method="get">
+
+              <%-include('showq2_q3',{actionArray:actionArray}); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+           <p>action is <i><%=  action%></i>, appears BEFORE <i><%= time%></i> seconds</p>
+             
+            <br> <br>
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            
+            <% } else {%>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+      
+              <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+                  </div>
+                  </div>
+          </form>
+
+              
+              
+        <% break;
+            case "q4": %>
+            
+              
+              <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Barring an Action from Appearing</h2>
+              <form action="/sub" method="get">
+             
+              
+              
+              
+              <%-include('show',{actionArray:actionArray}); %>
+              
+              <input type="hidden" name="questions" value = "<%= item %>" >
+              
+            </form>
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+            <p> action <%= actions %> is barred to appear in the plan</p>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            <% } else{ %>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+            <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+             </div>
+      </div>
+    </div>
+          
+        <% break;
+       
+            case "q5": %>
+            <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">The selected contrastive quesion is: Restricting an Action to occur less than certain number of time</h2>
+            <form action="/sub" method="get">
+
+              <%-include('showq5',{actionArray:actionArray}); %>
+              <br>
+              <input type="hidden" name="questions" value = "<%= item %>" >
+          
+
+                 </form>
+            <% if(submitted) {%>
+             <i class="bi bi-star me-1"></i> 
+             <p>action <i><%=  action%></i>, must occur less than <i><%= occ_time%></i> times</p>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            <% } else{ %>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>            
+            <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+             </div>
+      </div>
+    </div>
+          
+        <% break;
+          case "q6": %>
+              <div class="card">
+                  <div class="card-body">
+             <h2 class="card-title">The selected contrastive quesion is: Questioning the optimality of Plan Duration</h2>
+            <form action="/sub" method="get">
+                <div class="row mb-3">
+                <label for ="plan_duration" class="col-sm-2 col-form-label"> Plan duration</label>
+                <div class="col-sm-10">
+              <input  class="form-control" id = "plan_duration" type="text" name="plan_duration">
+          </div>
+      </div>
+ 
+             
+        <input type="hidden" name="questions" value = "<%= item %>" >
+                               <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                          <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+              
+          </form>
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+            <p>Plan duration must be less than <%= plan_duration%></p>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            <% } else{ %>
+                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+            <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+             </div>
+      </div>
+    </div>
+          
+        <% break;
+            case "q7": %>
+              <p> do something in q7</p>
+        <% break;
+          case "q8": %>
+              <div class="card">
+                  <div class="card-body">
+             <h2 class="card-title">The selected contrastive quesion is: Questioning the optimality of Plan Length</h2>
+            <form action="/sub" method="get">
+                <div class="row mb-3">
+                <label for ="plan_length" class="col-sm-2 col-form-label"> Plan length less than </label>
+                <div class="col-sm-10">
+              <input  class="form-control" id = "plan_length" type="text" name="plan_length">
+          </div>
+      </div>
+ 
+             
+        <input type="hidden" name="questions" value = "<%= item %>" >
+                               <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                          <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+              
+          </form>
+            <% if(submitted) {%>
+            <i class="bi bi-star me-1"></i>
+            <p>Plan length must be less than <%= plan_length%></p>
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+            <% if (stdout == "sorry mate! No plan") {%>
+            <p style=" font-family: 'Audiowide', sans-serif;">sorry mate, no plan available</p>
+            <% } else{ %>
+                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                
+               <pre><%= stdout%></pre>
+                <% var y = stdout.split('\n') %>
+                <% var lastline = y[y.length - 2] %>
+                <% var values = lastline.match(/[0-9.]+/g) %>
+                <% var alternate_plan= parseFloat(values[0]).toFixed(2) %>
+                <%= //global.data %>
+                <% var x = global.data.split('\n') %>
+                <% var lastline_global = x[x.length - 2] %>
+                <% var values = lastline_global.match(/[0-9.]+/g) %>
+                <% var original_plan= parseFloat(values[0]).toFixed(2) %>
+                
+                <% if(y.length < x.length) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                alternate plan is better in terms of number of lines</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>original plan is better in terms of number of lines</span>
+              
+                <% } %>
+                
+                 
+
+                <% if(alternate_plan < original_plan) {%>
+                <br>
+                <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i> alternate plan is better in terms of makespan</span>
+                <% } else { %>
+                <br>
+                <span class="badge bg-info text-dark"><i class="bi bi-info-circle me-1"></i>
+                original plan is better in terms of makespan</span>
+                <% } %>
+
+</div>
+            <br> <br>
+            <% } %>
+            <% } else { %>
+            <p></p>
+            <% }%>
+
+             </div>
+      </div>
+    </div>
+        <% break;
+            default: %>
+            <p>sorry mate</p>
+          
+        <% break; } %>
+    </div>
+
+    <div>
+      <%// var data = JSON.stringify(data) %>
+      <p><%= //data%></p>
+      <% //Object.entries(this.data).forEach(([key, value]) => {  %>
+        <!--<p> key = <%= //`${key}:`%> ; value = <%= //`${value}:`%> </p>-->
+      <% //})%>
+    </div>
+
+   
+  </body>
+</html>

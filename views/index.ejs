@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+
+  <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+      <title><%= title %></title>
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+    
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+      <!-- Favicons -->
+      <link href="assets/img/favicon.png" rel="icon">
+      <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+      
+      <!-- Google Fonts -->
+      <link href="https://fonts.gstatic.com" rel="preconnect">
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    
+      <!-- Vendor CSS Files -->
+      <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+      <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+      <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+      <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    
+      <!-- Template Main CSS File -->
+      <link href="assets/css/style.css" rel="stylesheet">
+    
+      <!-- =======================================================
+      * Template Name: NiceAdmin - v2.5.0
+      * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      * Author: BootstrapMade.com
+      * License: https://bootstrapmade.com/license/
+      ======================================================== -->
+    </head>
+  <body>
+
+<h2><%= title %></h2>
+     <!-- Card with an image on top -->
+          <div class="card">
+            <img src="assets/img/ai_planning.jpeg" class="card-img-top" alt="..."width="168px" height="300px">
+            <div class="card-body">
+              <h2 class="card-title"></h2>
+              <p class="card-text">In artificial intelligence planning, having an explanation of a plan given by a planner is often desirable. The ability to explain various aspects of a synthesized plan to an end-user not only brings in trust in the planner but also reveals insights into the planning domain and the planning process. Contrastive questions such as “Why action A instead of action B?” can be answered with a contrastive explanation that compares the properties of the original plan containing A against the contrastive plan containing B. In our work, we explore a set of contrastive questions that a user of a planning tool may raise and we propose a re-model and re-plan framework to provide explanations to such questions. We have used PDDL+, a planning domain definition language to describe planning instances of hybrid systems which model a mix of discrete-continuous dynamics. Specifically, given a mixed discrete-continuous system model in PDDL+ and a plan describing the set of desirable actions on the same to achieve a destined goal, we present a framework that can integrate contrastive questions in PDDL+ and synthesize alternate plans. We compare the original plan with the alternate ones to generate an explanation.</p>
+            </div>
+          </div><!-- End Card with an image on top -->
+
+
+
+<div class="alert border-info alert-dismissible fade show" role="alert">
+           
+              
+    <form action="submit" method="POST" enctype="multipart/form-data">
+      <label>Domain file</label>
+      <input name="file1" type="file">
+
+      <label>Problem File</label>
+      <input name="file2" type="file">
+
+      <br><br>
+
+      <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Submit</button>
+      
+
+    </form>
+  </div>
+  </body>
+</html>
