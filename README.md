@@ -18,10 +18,11 @@ signing XAIP as a web service.
 
 ## Prerequisites
 
-Before running this application, make sure you have the following installed:
+Before running this application, make sure you have the following installed in yur device:
 
 - [Node.js](https://nodejs.org/en/) version 12.x or later
 - [npm](https://www.npmjs.com/) package manager
+- [SMTPLAN+](https://github.com/KCL-Planning/SMTPlan) AI Planner 
 
 ## Installing Dependencies
 
