@@ -1,7 +1,7 @@
 # A Contrastive Explanation Service for Plans in Hybrid Domains
 <br>
 This project proposes a novel approach for generating optimal
-plans by automating and iteratively generating Hypothetical
+plans in terms of _makespan_  and plan length, by automating and iteratively generating Hypothetical
 models. The proposed approach consists of three main steps:
 (1) the automation of Hmodel generation, (2) the use of an
 iterative model to obtain an optimal plan, and (3) the use of
@@ -18,10 +18,11 @@ signing XAIP as a web service.
 
 ## Prerequisites
 
-Before running this application, make sure you have the following installed:
+Before running this application, make sure you have the following installed in your device:
 
 - [Node.js](https://nodejs.org/en/) version 12.x or later
 - [npm](https://www.npmjs.com/) package manager
+- [SMTPLAN+](https://github.com/KCL-Planning/SMTPlan) AI Planner 
 
 ## Installing Dependencies
 
@@ -38,4 +39,4 @@ This will start the Node.js server and the application will be accessible at `ht
 
 ## Note 
 
-Try domain/problem files from Uploads folder to run the Web-service efficiently
+Try domain/problem files from [Uploads](https://github.com/manabjamin2nadved1947/XAIP/tree/main/uploads) folder to run the Web-service efficiently
