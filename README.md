@@ -13,3 +13,26 @@ existing approaches in terms of both accuracy and efficiency.
 This paper contributes to the field of automated planning and
 scheduling by providing a new and effective approach for de-
 signing XAIP as a web service.
+<br>
+<br>
+
+## Prerequisites
+
+Before running this application, make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/en/) version 12.x or later
+- [npm](https://www.npmjs.com/) package manager
+
+## Installing Dependencies
+
+After cloning the repository, navigate to the project directory in your terminal and run the following command to install the required dependencies:
+`npm install`
+
+
+## Running the Application
+
+Once the dependencies are installed, you can start the application using the following command: `npm start`
+
+This will start the Node.js server and the application will be accessible at `http://localhost:3000`.
+
+
