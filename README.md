@@ -1,18 +1,6 @@
 # A Contrastive Explanation Service for Plans in Hybrid Domains
 <br>
-This project proposes a novel approach for generating optimal
-plans in terms of _makespan_  and plan length, by automating and iteratively generating Hypothetical
-models. The proposed approach consists of three main steps:
-(1) the automation of Hmodel generation, (2) the use of an
-iterative model to obtain an optimal plan, and (3) the use of
-both automation and iterative Hmodel generation to indepen-
-dently generate an optimal plan, regardless of the user’s input.
-The effectiveness of the proposed approach is demonstrated
-through experiments and results show that it can outperform
-existing approaches in terms of both accuracy and efficiency.
-This paper contributes to the field of automated planning and
-scheduling by providing a new and effective approach for de-
-signing XAIP as a web service.
+In this paper, we present a tool interface as a web service for generating contrastive explanations of plans in hybrid domains. The interface presents the user with a collection of contrastive questions over a plan in a hybrid domain. The tool produces an explanation of the user question by contrasting the plan against the best alternative that the planner under consideration can generate in terms of makespan and plan-length. The tool consists of : (1) A GUI for posing questions, viewing contrastive plans and the generated explanations thereof (2) A backend implementing an iterative re-modeling and re-planning algorithm to obtain a contrastive plan. We present results on the execution of our tool on some benchmark examples.
 <br>
 <br>
 
@@ -40,3 +28,6 @@ This will start the Node.js server and the application will be accessible at `ht
 ## Note 
 
 Try domain/problem files from [Uploads](https://github.com/manabjamin2nadved1947/XAIP/tree/main/uploads) folder to run the Web-service efficiently
+<br>
+After downloading, install nodejs (using Ubuntu) by the following command : `sudo apt-get install -y nodejs
+`
