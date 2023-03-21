@@ -31,3 +31,6 @@ Try domain/problem files from [Uploads](https://github.com/manabjamin2nadved1947
 <br>
 After downloading, install nodejs (using Ubuntu) by the following command : `sudo apt-get install -y nodejs
 `
+<br>
+Once the SMTPLAN+ is installed in the common location, you have to copy the SMTPLAN+ in the _/usr/local/bin directory_ , using the command: `sudo cp -r /path/to/your/file /usr/local/bin/
+` 
