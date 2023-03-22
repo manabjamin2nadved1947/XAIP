@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     //app.locals.file2 = file2;
     await file2.mv(path.resolve(__dirname, '../uploads', file2.name))
 
-    const child = execFile('/home/devdan/SMTPlan/SMTPlan/build/SMTPlan', ['./uploads/'+file1.name, './uploads/'+file2.name], (error, stdout, stderr) => {
+    const child = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan', ['./uploads/'+file1.name, './uploads/'+file2.name], (error, stdout, stderr) => {
         if (error) {
         throw error;
         }
