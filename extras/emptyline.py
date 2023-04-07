@@ -1,3 +1,4 @@
+'''
 with open('output.txt') as reader, open('output.txt', 'r+') as writer:
 	for line in reader:
 		if line.strip():
@@ -11,3 +12,4 @@ txt1 = f.readlines()
 
 for line in txt1:
 	print(line)
+'''
