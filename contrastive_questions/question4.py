@@ -79,7 +79,7 @@ for x in txt:
 	print(x)
 
 #write modified domain in the file
-with open('modified_q4_domain.pddl','w+') as file:
+with open('modified_planning_problem/modified_q4_domain.pddl','w+') as file:
 	file.writelines(txt)		
 
 """

@@ -79,8 +79,8 @@ problem = problem[:initpos]+init_s+problem[initpos+init_len:]
 print()
 print(problem)
 
-with open('modified_q8_domain.pddl','w+') as file:
+with open('modified_planning_problem/modified_q8_domain.pddl','w+') as file:
 	file.writelines(domain)
 
-with open('modified_q8_problem.pddl','w+') as file:
+with open('modified_planning_problem/modified_q8_problem.pddl','w+') as file:
 	file.writelines(problem)

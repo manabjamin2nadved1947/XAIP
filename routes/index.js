@@ -97,7 +97,7 @@ router.get('/sub',(req,res,next)=>{
 
   /* question 1*/
   if(req.query.questions == 'q1'){
-    const python = execFile('python3',['question1.py',req.query.action1, req.query.instance, req.query.action2,'./uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['contrastive_questions/question1.py',req.query.action1, req.query.instance, req.query.action2,'./uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
       if (error){
         throw error
       }
@@ -105,7 +105,7 @@ router.get('/sub',(req,res,next)=>{
         console.log(stdout);
 
         var a = false;
-         const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q1_domain.pddl', 'modified_q1_problem.pddl'], (error,stdout,stderror)=>{
+         const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q1_domain.pddl', 'modified_planning_problem/modified_q1_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -134,7 +134,7 @@ router.get('/sub',(req,res,next)=>{
 
  /*question 2*/ 
   if(req.query.questions == 'q2'){
-    const python = execFile('python3',['question2.py',req.query.action, req.query.time, './uploads/'+global.file1.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['contrastive_questions/question2.py',req.query.action, req.query.time, './uploads/'+global.file1.name],(error, stdout, stderror)=>{
       if (error){
         throw error
       }
@@ -143,7 +143,7 @@ router.get('/sub',(req,res,next)=>{
         console.log(stdout);
 
         var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q2_domain.pddl', './uploads/'+global.file2.name], {timeout:100000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q2_domain.pddl', './uploads/'+global.file2.name], {timeout:100000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -173,14 +173,14 @@ router.get('/sub',(req,res,next)=>{
 
  /*question 3*/ 
   if(req.query.questions == 'q3'){
-    const python = execFile('python3',['question3.py',req.query.action, req.query.time, './uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['contrastive_questions/question3.py',req.query.action, req.query.time, './uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
       if (error){
         throw error
       }
       else{
         console.log(stdout);
         var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q3_domain.pddl', 'modified_q3_problem.pddl'], {timeout:12000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q3_domain.pddl', 'modified_planning_problem/modified_q3_problem.pddl'], {timeout:12000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
           if(error){
             throw error;
           }
@@ -213,7 +213,7 @@ router.get('/sub',(req,res,next)=>{
   if (req.query.questions == 'q4'){
     //console.log("\n I will surely solve it\n")
     /*run the python code here to get contrastive plan*/
-    const python = execFile('python3',['question4.py',req.query.actions, './uploads/'+global.file1.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['contrastive_questions/question4.py',req.query.actions, './uploads/'+global.file1.name],(error, stdout, stderror)=>{
         if(error){
             throw error
         }
@@ -223,7 +223,7 @@ router.get('/sub',(req,res,next)=>{
           problem_file = problem_file.slice(1,-6) 
           //console.log(problem_file)
           var a = false;
-          const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q4_domain.pddl', './uploads/'+global.file2.name], (error,stdout,stderror)=>{
+          const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q4_domain.pddl', './uploads/'+global.file2.name], (error,stdout,stderror)=>{
             if(error){
               throw error;
             }
@@ -253,14 +253,14 @@ router.get('/sub',(req,res,next)=>{
 
   /*question 5*/ 
   if(req.query.questions == 'q5'){
-    const python = execFile('python3',['question5.py',req.query.action, req.query.occ_time, './uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['contrastive_questions/question5.py',req.query.action, req.query.occ_time, './uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
       if (error){
         throw error
       }
       else{
         console.log(stdout);
         var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q5_domain.pddl', 'modified_q5_problem.pddl'], (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q5_domain.pddl', 'modified_planning_problem/modified_q5_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -292,7 +292,7 @@ router.get('/sub',(req,res,next)=>{
   console.log('now qs is '+req.query.questions)
   if(req.query.questions == 'q6'){
     
-    const python = execFile('python3',['question6.py',req.query.plan_duration,'./uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['contrastive_questions/question6.py',req.query.plan_duration,'./uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
       if (error){
         throw error
       }
@@ -300,7 +300,7 @@ router.get('/sub',(req,res,next)=>{
         console.log(stdout);
         var a = false;
 
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['./uploads/'+global.file1.name, 'modified_q6_problem.pddl'], (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['./uploads/'+global.file1.name, 'modified_planning_problem/modified_q6_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -333,14 +333,14 @@ router.get('/sub',(req,res,next)=>{
 
   /*question 8*/
 if(req.query.questions == 'q8'){
-    const python = execFile('python3',['question8.py',req.query.plan_length, './uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+    const python = execFile('python3',['contrastive_questions/question8.py',req.query.plan_length, './uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
       if (error){
         throw error
       }
       else{
         console.log(stdout);
         var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q8_domain.pddl', 'modified_q8_problem.pddl'], (error,stdout,stderror)=>{
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q8_domain.pddl', 'modified_planning_problem/modified_q8_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
@@ -370,7 +370,7 @@ if(req.query.questions == 'q8'){
 
   
   
-  fs.writeFile('terminal_question.txt',JSON.stringify(data),'utf8', (err)=>{
+  fs.writeFile('extras/terminal_question.txt',JSON.stringify(data),'utf8', (err)=>{
     if (err) console.log(err);
     
   })

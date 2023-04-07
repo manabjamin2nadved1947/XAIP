@@ -64,5 +64,5 @@ print()
 print(problem)
 
 
-with open('modified_q5_problem.pddl','w+') as file:
+with open('modified_planning_problem/modified_q5_problem.pddl','w+') as file:
 	file.writelines(problem)

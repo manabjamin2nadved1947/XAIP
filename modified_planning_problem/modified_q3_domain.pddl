@@ -31,8 +31,8 @@
 :effect(goal_reached)
 )
 
-(:action accelerate_new
+(:action decelerate_new
   :parameters()
-  :precondition (and (< (running_time) 30) (running) (< (a) (up_limit)))
-  :effect (and (do_before_new) (increase (a) 1))
+  :precondition (and (< (running_time) 5) (running) (> (a) (down_limit)))
+  :effect (and (do_before_new) (decrease (a) 1))
 ))

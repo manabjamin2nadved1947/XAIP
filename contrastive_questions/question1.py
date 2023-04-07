@@ -275,9 +275,9 @@ print(problem)
 
 #write both dom/prob in new file
 #write modified domain in the file
-with open('modified_q1_domain.pddl','w+') as file:
+with open('modified_planning_problem/modified_q1_domain.pddl','w+') as file:
 	file.writelines(domain)	
 #write modified problem in the file
-with open('modified_q1_problem.pddl','w+') as file:
+with open('modified_planning_problem/modified_q1_problem.pddl','w+') as file:
 	file.writelines(problem)		
 	
