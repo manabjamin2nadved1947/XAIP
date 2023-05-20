@@ -22,9 +22,9 @@ After cloning the repository, navigate to the project directory in your terminal
 After downloading, install nodejs (using Ubuntu) by the following command : `sudo apt-get install -y nodejs
 `
 <br>
-Check that the install was successful by querying `node` and `npm` for its version number: `node --version` and `npm --version`
+Check that the install was successful by querying `node` and `npm` for its version number: `node --version ` and `npm --version`
 
-Once the SMTPLAN+ is installed in the common location, you have to copy the SMTPLAN+ in the _/usr/local/bin directory_ , using the command: `sudo cp -r /path/to/your/file /usr/local/bin/
+Once the SMTPLAN+ and ENHSP is installed in the common location, you have to copy the SMTPLAN+  and ENHSP in the _/usr/local/bin directory_ , using the command: `sudo cp -r /path/to/your/file /usr/local/bin/
 `  
 
 ## Running the Application
