@@ -1,11 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var runCpp = require('../services/runCpp');
+var opt_plan = require('../services/opt_plan');
+var opt_plan_len = require('../services/opt_plan_len');
 const { execFile } = require('child_process');
 var util = require('util');
 var fs = require('fs')
 
 var app = express()
+
+const session = require('express-session');
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,6 +32,7 @@ router.post('/sub',(req, res,next)=>{
   global.actionArray=[]
 
   //console.log(`inside post ${req.body.questions}`)
+  // make a list of actions from the uploaded domain file
     var data = fs.readFileSync('./uploads/'+global.file1.name,'utf8')
       var searchKeyword = ":action "; //":durative-action "
       if(data.search(searchKeyword)!=-1){
@@ -73,6 +85,7 @@ router.post('/sub',(req, res,next)=>{
 
       }
       console.log(actionArray)
+      console.log("hooray"+global.planner)
   
   if(req.body.questions=='q1'){
    //do something 
@@ -92,34 +105,53 @@ router.post('/sub',(req, res,next)=>{
 
 
 router.get('/sub',(req,res,next)=>{
-  var data = req.query
-  console.log(req.query)
+  global.sub_query_qs = req.query.questions
+  //req.session.questions = req.query.questions;
+
+  //console.log(req.session.questions)
+
+
+global.a = true;
+  var callback =  (error,stdout,stderror)=>{
+    if(error){
+        throw error;
+      }
+      else{
+        global.a = true;
+        console.log(stdout);
+
+        res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
+      }
+}
 
   /* question 1*/
   if(req.query.questions == 'q1'){
-    const python = execFile('python3',['contrastive_questions/question1.py',req.query.action1, req.query.instance, req.query.action2,'./uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+
+
+    if(global.planner=='smtplan'){
+      const python = execFile('python3',['contrastive_questions/question1.py',req.query.action1, req.query.instance, req.query.action2,'./uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
       if (error){
         throw error
       }
       else{
         console.log(stdout);
 
-        var a = false;
-         const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q1_domain.pddl', 'modified_planning_problem/modified_q1_problem.pddl'], (error,stdout,stderror)=>{
+        global.a = false;
+         const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problems/modified_q1_domain.pddl', 'modified_planning_problems/modified_q1_problem.pddl'], (error,stdout,stderror)=>{
       if(error){
         throw error;
       }
       else{
-        a = true;
+        global.a = true;
         console.log(stdout);
 
-        res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, input: req.query, submitted: true}}) //spread 
+        res.render('sub',{...{item: req.query.questions, stdout: stdout, ...req.query, input: req.query, submitted: true}}) //spread 
       }
     })
 
       }
 
-             const myTimeout = setTimeout(myError, 1000);
+             const myTimeout = setTimeout(myError, 10000);
       function myError() {
         var msg = "sorry mate! No plan"; 
         if (a== false) {
@@ -128,9 +160,50 @@ router.get('/sub',(req,res,next)=>{
         }
       }
     })
+    }
+    
+
+    if(global.planner=='enhsp'){
+      const python = execFile('python3',['contrastive_questions/question1_enhsp.py',req.query.action1, req.query.instance, req.query.action2,'./uploads/'+global.file1.name,'./uploads/'+global.file2.name],(error, stdout, stderror)=>{
+      if (error){
+        throw error
+      }
+      else{
+        console.log(stdout);
+
+        global.a = false;
+         const enhsp = execFile('/usr/local/bin/ENHSP-Public/enhsp',['-o','modified_planning_problems/modified_q1_domain.pddl','-f', 'modified_planning_problems/modified_q1_problem.pddl'], (error,stdout,stderror)=>{
+      if(error){
+        throw error;
+      }
+      else{
+        global.a = true;
+        console.log(stdout);
+
+        res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, input: req.query, submitted: true}}) //spread 
+      }
+    })
+
+      }
+
+             const myTimeout = setTimeout(myError, 10000);
+      function myError() {
+        var msg = "sorry mate! No plan"; 
+        if (a== false) {
+          res.render('sub',{...{item: req.query.questions, stdout: msg,  ...req.query, submitted: true}}) //spread 
+
+        }
+      }
+    })
+    }
+    
+
+
 
    
   }
+
+
 
  /*question 2*/ 
   if(req.query.questions == 'q2'){
@@ -142,21 +215,29 @@ router.get('/sub',(req,res,next)=>{
         console.log(`${req.query.action}, ${req.query.time}` )
         console.log(stdout);
 
-        var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q2_domain.pddl', './uploads/'+global.file2.name], {timeout:100000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
-      if(error){
+        global.a = false;
+        if (global.planner == 'enhsp'){
+          const enhsp = execFile('/usr/local/bin/ENHSP-Public/enhsp',['-o', 'modified_planning_problems/modified_q2_domain.pddl', '-f', './uploads/'+file2.name], callback)
+
+        }
+        if(global.planner =='smtplan'){
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problems/modified_q2_domain.pddl', './uploads/'+global.file2.name], {timeout:100000 , killSignal: 'SIGSTOP'},callback)
+
+        }
+        //const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_q2_domain.pddl', './uploads/'+global.file2.name], {timeout:100000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
+      /*if(error){
         throw error;
       }
       else{
-        a = true;
+        global.a = true;
         console.log(stdout);
 
         res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
       }
-        })    
+    }) */  
       }
 
-      const myTimeout = setTimeout(myError, 1000);
+      const myTimeout = setTimeout(myError, 10000);
       function myError() {
         var msg = "sorry mate! No plan"; 
         if (a== false) {
@@ -179,18 +260,25 @@ router.get('/sub',(req,res,next)=>{
       }
       else{
         console.log(stdout);
-        var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q3_domain.pddl', 'modified_planning_problem/modified_q3_problem.pddl'], {timeout:12000 , killSignal: 'SIGSTOP'}, (error,stdout,stderror)=>{
-          if(error){
+         global.a = false;
+        if(global.planner=='enhsp'){
+          const enhsp = execFile('/usr/local/bin/ENHSP-Public/enhsp',['-o', 'modified_planning_problems/modified_q3_domain.pddl', '-f', 'modified_planning_problems/modified_q3_problem.pddl'],callback)
+
+        } 
+        if(global.planner =='smtplan'){
+          const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problems/modified_q3_domain.pddl', 'modified_planning_problems/modified_q3_problem.pddl'], {timeout:12000 , killSignal: 'SIGSTOP'}, callback)
+
+        }
+          /*if(error){
             throw error;
           }
           else{
-            a = true;
+            global.a = true;
             console.log(stdout);
 
             res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
           }
-        })
+        })*/
       }
 
       const myTimeout = setTimeout(myError, 1000);
@@ -222,19 +310,27 @@ router.get('/sub',(req,res,next)=>{
           problem_file = JSON.stringify(global.file2.name);
           problem_file = problem_file.slice(1,-6) 
           //console.log(problem_file)
-          var a = false;
-          const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q4_domain.pddl', './uploads/'+global.file2.name], (error,stdout,stderror)=>{
-            if(error){
+          global.a = false;
+
+          if(global.planner =='enhsp'){
+            const enhsp = execFile('/usr/local/bin/ENHSP-Public/enhsp',['-o', 'modified_planning_problems/modified_q4_domain', '-f', '.uploads/'+global.file2.name],callback)
+
+          }
+          if(global.planner =='smtplan'){
+            const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problems/modified_q4_domain.pddl', './uploads/'+global.file2.name], callback)
+
+          }
+            /*if(error){
               throw error;
             }
             else{
-              a = true;
+              global.a = true;
               console.log(stdout);
 
               res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
             }
 
-          })
+          })*/
         }
 
         //console.log('reached here')
@@ -259,18 +355,25 @@ router.get('/sub',(req,res,next)=>{
       }
       else{
         console.log(stdout);
-        var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q5_domain.pddl', 'modified_planning_problem/modified_q5_problem.pddl'], (error,stdout,stderror)=>{
-      if(error){
+        global.a = false;
+      if(global.planner =='enhsp'){
+        const enhsp = execFile('/usr/local/bin/ENHSP-Public/enhsp',['-o', 'modified_planning_problems/modified_q5_domain.pddl', '-f', 'modified_planning_problems/modified_q5_problem.pddl'],callback)
+
+      }
+      if(global.planner=='smtplan'){
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problems/modified_q5_domain.pddl', 'modified_planning_problems/modified_q5_problem.pddl'], callback)
+
+      }
+      /*if(error){
         throw error;
       }
       else{
-        a = true;
+        global.a = true;
         console.log(stdout);
 
         res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
       }
-    })
+    })*/
 
       }
 
@@ -298,23 +401,29 @@ router.get('/sub',(req,res,next)=>{
       }
       else{
         console.log(stdout);
-        var a = false;
+        global.a = false;
+       if(global.planner =='enhsp'){
+        const enhsp = execFile('/usr/local/bin/ENHSP-Public/enhsp',['-o', './uploads/'+global.file1.name, '-f', 'modified_planning_problems/modified_q6_problem.pddl'],callback)
 
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['./uploads/'+global.file1.name, 'modified_planning_problem/modified_q6_problem.pddl'], (error,stdout,stderror)=>{
-      if(error){
+       }
+       if(global.planner=='smtplan'){
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['./uploads/'+global.file1.name, 'modified_planning_problems/modified_q6_problem.pddl'], callback)
+
+       }
+      /*if(error){
         throw error;
       }
       else{
-        a = true;
+        global.a = true;
         console.log(stdout);
 
         res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
       }
-    })
+    })*/
 
       }
 
-       const myTimeout = setTimeout(myError, 1000);
+       const myTimeout = setTimeout(myError, 10000);
       function myError() {
         var msg = "sorry mate! No plan"; 
         if (a== false) {
@@ -339,18 +448,25 @@ if(req.query.questions == 'q8'){
       }
       else{
         console.log(stdout);
-        var a = false;
-        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problem/modified_q8_domain.pddl', 'modified_planning_problem/modified_q8_problem.pddl'], (error,stdout,stderror)=>{
-      if(error){
+        global.a = false;
+      if(global.planner =='enhsp'){
+        const enhsp = execFile('/usr/local/bin/ENHSP-Public/enhsp',['-o', 'modified_planning_problems/modified_q8_domain.pddl', '-f', 'modified_planning_problems/modified_q8_problem.pddl'],callback)
+
+      }
+      if(global.planner =='smtplan'){
+        const smtplan = execFile('/usr/local/bin/SMTPlan/SMTPlan/build/SMTPlan',['modified_planning_problems/modified_q8_domain.pddl', 'modified_planning_problems/modified_q8_problem.pddl'],callback)
+
+      }
+      /*if(error){
         throw error;
       }
       else{
-        a = true;
+        global.a = true;
         console.log(stdout);
 
         res.render('sub',{...{item: req.query.questions, stdout: stdout,  ...req.query, submitted: true}}) //spread 
       }
-    })
+    })*/
 
       }
 
@@ -370,11 +486,12 @@ if(req.query.questions == 'q8'){
 
   
   
-  fs.writeFile('extras/terminal_question.txt',JSON.stringify(data),'utf8', (err)=>{
+  fs.writeFile('terminal_question.txt',JSON.stringify(data),'utf8', (err)=>{
     if (err) console.log(err);
     
   })
 })
 
- 
+router.get('/optimal',opt_plan) 
+router.get('/optimal_len',opt_plan_len)
 module.exports = router;

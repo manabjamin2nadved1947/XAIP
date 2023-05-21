@@ -10,6 +10,6 @@
 		(= a 0)
 		(= v 0)
 	)
-     (:goal (and (goal_reached) (not(engineBlown)) (<= (running_time) 11) (transmission_fine) ))
+     (:goal (and (has_done_accelerate_4) (goal_reached) (not(engineBlown)) (<= (running_time) 50) (transmission_fine) ))
      (:metric minimize(total-time))
 )

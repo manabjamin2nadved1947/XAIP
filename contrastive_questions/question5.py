@@ -18,6 +18,7 @@ eff_pos = domain.find("effect", actionPos)
 #search for first "and" after "effect"
 andpos = domain.find("and",eff_pos+len("effect"))
 eff = f'and (increase (s) 1)'
+
 domain = domain[:andpos]+eff+domain[andpos+3:]
 
 
@@ -35,7 +36,7 @@ domain = domain.replace(action,new_action)
 print(domain)
 #write modified domain in the file
 
-with open('modified_q5_domain.pddl','w+') as file:
+with open('modified_planning_problems/modified_q5_domain.pddl','w+') as file:
 	file.writelines(domain)	
 
 
@@ -64,5 +65,5 @@ print()
 print(problem)
 
 
-with open('modified_planning_problem/modified_q5_problem.pddl','w+') as file:
+with open('modified_planning_problems/modified_q5_problem.pddl','w+') as file:
 	file.writelines(problem)

@@ -19,5 +19,5 @@ problem = problem[:runpos]+res
 # replace the digit with another
 
 print(problem)
-with open('modified_planning_problem/modified_q6_problem.pddl','w+') as file:
+with open('modified_planning_problems/modified_q6_problem.pddl','w+') as file:
 	file.writelines(problem)

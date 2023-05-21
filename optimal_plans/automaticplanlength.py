@@ -34,18 +34,22 @@ def run_file(length):
 
 
 res = run_smtplan(sys.argv[1],sys.argv[2]) #domain /problem 
-print(res)
+print(res.stdout.decode('utf-8'))
 length =extract_len(res)
 
 while(res!="-1"):
     length =int(length)
     length =length-1
-    print(length)
+    print(f'trying with length {length}')
     run_file(length)
-    res = run_smtplan(sys.argv[3],sys.argv[4])
-    print(res)
-    if res!="-1":   
-        length = extract_len(res)
+    res = run_smtplan(sys.argv[3],sys.argv[4]) #modifiedq8 dom/prob
+    
+    if res!="-1": 
 
+        print(res.stdout.decode('utf-8'))
+        length = extract_len(res)
+    else:
+        print("no plan")
+#print(res.stdout.decode('utf-8'))
 print(f"optimal length is {length+1}")
 

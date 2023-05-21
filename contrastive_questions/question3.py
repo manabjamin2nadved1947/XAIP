@@ -113,7 +113,7 @@ domain = domain +")"
 
 print(domain)
 #write modified domain in the file
-with open('modified_planning_problem/modified_q3_domain.pddl','w+') as file:
+with open('modified_planning_problems/modified_q3_domain.pddl','w+') as file:
 	file.writelines(domain)	
 
 #change in problem file
@@ -136,7 +136,7 @@ print(problem)
 
 
 
-with open('modified_planning_problem/modified_q3_problem.pddl','w+') as file:
+with open('modified_planning_problems/modified_q3_problem.pddl','w+') as file:
 	file.writelines(problem)		
 	
 

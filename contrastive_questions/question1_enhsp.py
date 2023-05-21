@@ -1,65 +1,57 @@
-#enumerate lines in file
 import re
 import sys
 from collections import deque  
 
-with open('extras/output.txt') as reader, open('extras/output.txt', 'r+') as writer:
-	for line in reader:
-		if line.strip():
-			writer.write(line)
-	writer.truncate()
 
-f= open('extras/output.txt')
-txt = f.read()
-f= open('extras/output.txt')
+f= open('extras/enhsp_output.txt')
+txt2 = f.read()
+
+
+
+#delete lines with "waiting" keyword
+txt2 = re.sub(r'^.*waiting.*$', '', txt2, flags=re.MULTILINE)
+#delete lines with Parameters: keyword
+txt2 = re.sub(r'Parameters:', '', txt2)
+with open('extras/enhsp_replaced.txt', 'w+') as f:
+    f.write(txt2)
+    #pass
+
+f= open('extras/enhsp_replaced.txt')
 txt1 = f.readlines()
 
-
-'''
+#extract all the times of the actions in the list `time[]`
+time = []
 for line in txt1:
-	print(line)
-'''
-def find_ith_newline_action(txt, action, i):
-	a=[]
-	start = txt.find(action)
-	newline =  txt.find('\n')
-	while start >= 0 and i > 1:
-		newline =  txt.find('\n', start+len(action))
-		start = txt.find(action, start+len(action))
-		
-		i -= 1
-	a.append(start)
-	a.append(newline)
-	return a #[action ,beginning of the line where action resides]
+    match = re.search(r'\((.*?)\)', line)
+    if match:
+        time.append(float(match.group(1)))
 
-
-#print(txt[find_ith(txt,'decelerate',2)])
-#print(find_ith(txt,'decelerate',2))
-
-# make an array of actions
-start = '\t'
-end =' '
+#extract all actions in the list
 actionList=[]
-for i in range(len(txt1)):
-	s= txt1[i]
-	#print(s)
-	t=s[s.find(start)+len(start): s.find(end)]
-	#print(t)
-	actionList.append(t)
-print(actionList)
+for line in txt1:
+	match = re.search(r'([a-zA-Z]+)', line)
+	#print(matches)
+	if match:
+		actionList.append(match.group(1))
+print(f'the actions are \n{actionList}')
 
-#remove parentheses from the actionList
-pattern = r'[\( \)]' 
-for i in range(len(actionList)):
-	temp = re.sub(pattern,"",actionList[i])
-	actionList[i]=temp
-print(actionList)
+print(f'the values are \n{time}')
+
+f= open('extras/enhsp_replaced.txt')
+txt1 = f.readlines()
+for line in txt1:
+	#pass
+	print(line)
+
+
+
 #search which line for ith instance of action a
-action = sys.argv[1]
+action = sys.argv[1] #action which is gonna replace
 i= int(sys.argv[2])-1
-b= sys.argv[3]
+b= sys.argv[3] #action with which it is replaced
 domain_file = sys.argv[4]
 problem_file = sys.argv[5]
+
 #number of line preceding ith action
 try:
 
@@ -67,6 +59,14 @@ try:
 except:
 	print("action is not matching")
 #print(f'{action} is in line {j+1}')
+'''
+k=[]
+for j,n in enumerate(actionList):
+	if n==action:
+		#print(j)
+		k.append(j)
+print(f'action {action} is in line {k[i]+1}')
+'''
 
 #appending upto i-1th element
 modifiedActionList=[]
@@ -86,6 +86,7 @@ with open(domain_file) as reader, open(domain_file, 'r+') as writer:
 	writer.truncate()
 f = open(domain_file)
 domain = f.read()
+
 
 #last parenthesis of domain file
 

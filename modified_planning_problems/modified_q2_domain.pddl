@@ -10,9 +10,9 @@
 	     (increase (running_time) (* #t 1))
 )
 )
-(:action accelerate
+(:action accelerate10
   :parameters()
-  :precondition (and (running) (< (a) (up_limit)))
+  :precondition (and (> (running_time) 10) (running) (< (a) (up_limit)))
   :effect (and (increase (a) 1))
 )
 (:action decelerate

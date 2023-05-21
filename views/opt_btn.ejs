@@ -1,0 +1,109 @@
+
+
+<!--<a id ="show_optimal" href ="/optimal" class="btn btn-outline-danger" style = "float: right" onclick="show_waiting()">Show optimal</a>-->
+<div class="button-container" >
+<a id="show_optimal" href="/optimal" class="btn btn-outline-danger right-align" onclick="show_waiting()" style="font-size: 20px;">Show optimal</a>
+
+
+<video id="bg-video" loop muted style="display: none;">
+  <source src="assets/img/istockphoto-1353982334-640_adpp_is.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+</div>
+
+
+
+<script>
+  function show_waiting() {
+    let my_btn = document.getElementById("show_optimal");
+    my_btn.innerHTML = "Waiting...";
+    
+    let bg_video = document.getElementById("bg-video");
+    bg_video.style.display = "block";
+    bg_video.load();
+    bg_video.addEventListener('loadedmetadata',function(){
+      bg_video.play();
+    });
+    //bg_video.play();
+    
+    let waiting_overlay = document.getElementById("waiting-overlay");
+    waiting_overlay.style.display = "block";
+    
+    setTimeout(execute_command, 5000);
+  }
+  
+  function execute_command() {
+   
+    
+    let bg_video = document.getElementById("bg-video");
+    bg_video.style.display = "none";
+    bg_video.pause();
+    
+    let waiting_overlay = document.getElementById("waiting-overlay");
+    waiting_overlay.style.display = "none";
+    
+    let my_btn = document.getElementById("show_optimal");
+    my_btn.innerHTML = "Show optimal";
+  }
+
+  // Pause video on page unload
+  window.addEventListener("beforeunload", function () {
+    let bg_video = document.getElementById("bg-video");
+    if (!bg_video.paused) {
+      bg_video.pause();
+    }
+    //bg_video.style.display ="none";
+  });
+
+   bg_video.addEventListener('ended', function() {
+    bg_video.currentTime = 0;
+    bg_video.play();
+  });
+  //assets/img/istockphoto-1353982334-640_adpp_is.mp4
+
+</script>
+
+<style>
+  #show_optimal {
+    display: inline-block; 
+    padding: 10px; /* Add some padding around the button */
+    }
+
+    
+    .right-align {
+        float: right;
+        margin-right: 10px; /* Add some space between the button and its container element */
+    }
+
+  #video-container {
+    position: absolute;
+    overflow: hidden;
+  }
+
+  #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  #waiting-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    /* Add styles for waiting message and other elements */
+  }
+</style>
+
+
+
+
+
+

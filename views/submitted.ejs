@@ -62,17 +62,17 @@
 
           
            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <h5 class="card-title">The following is the plan produced by SMTPLAN+</h5>
+              <h5 class="card-title" style="font-size:35px">The following is the plan produced by <%= planner %></h5>
 
               <nav >
-                <ol class="breadcrumb">
+                <ol class="breadcrumb" style="font-size: 20px">
                   <li class="breadcrumb-item">Time</li>
                   <li class="breadcrumb-item">Action</li>
                   <li class="breadcrumb-item active">Duration</li>
                 </ol>
               </nav>
 
-              <pre > <%= data %> </pre>
+              <pre> <span class="inner-pre" style="font-size: 25px"> <%= data %> </span> </pre>
 </div>
             
           
@@ -82,10 +82,10 @@
 <div class="float-md-right">
 <form action="/sub" method="post">
   <div class="btn-group">
-  <button class="btn btn-secondary btn-lg btn-danger"  type="button" data-toggle="dropdown" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false"for="questions">Choose a contrastive question:</button>
+  <button class="btn btn-secondary btn-lg btn-danger"  type="button" data-toggle="dropdown" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false"for="questions" style="font-size: 25px">Choose a contrastive question:</button>
 
 
-  <select name="questions" id="questions" class="float-md-right">
+  <select name="questions" id="questions" class="float-md-right" style="font-size: 25px">
    <option value="q1"> Replacing an Action by Another
 </option>
     <option value="q2" >Restricting an Action to Appear After a certain time</option>

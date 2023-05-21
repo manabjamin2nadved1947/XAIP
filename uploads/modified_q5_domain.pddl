@@ -1,10 +1,7 @@
 (define (domain car)
 (:requirements :typing :durative-actions :fluents :time :negative-preconditions :timed-initial-literals)
-
 (:predicates (running) (stopped) (engineBlown) (transmission_fine) (goal_reached) )
-
-(:functions (d) (v) (a) (up_limit) (down_limit) (running_time) )
-
+(:functions (s) (d) (v) (a) (up_limit) (down_limit) (running_time) )
 (:process moving
 :parameters ()
 :precondition (and (running))
@@ -13,31 +10,24 @@
 	     (increase (running_time) (* #t 1))
 )
 )
-
-(:action accelerate
+(:action accelerate1
   :parameters()
   :precondition (and (running) (< (a) (up_limit)))
-  :effect (and (increase (a) 1))
+  :effect (and (increase (s) 1) (increase (a) 1))
 )
-
 (:action decelerate
   :parameters()
   :precondition (and (running) (> (a) (down_limit)))
   :effect (and (decrease (a) 1))
 )
-
 (:event engineExplode
 :parameters ()
 :precondition (and (running) (>= (a) 1) (>= (v) 100))
 :effect (and (not (running)) (engineBlown) (assign (a) 0))
 )
-
 (:action stop
 :parameters()
 :precondition(and (= (v) 0) (>= (d) 30) (not (engineBlown)) )
 :effect(goal_reached)
 )
-
 )
-
-

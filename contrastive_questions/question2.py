@@ -26,7 +26,7 @@ domain = domain.replace(action,new_action)
 print(domain)
 
 #write modified domain in the file
-with open('modified_planning_problem/modified_q2_domain.pddl','w+') as file:
+with open('modified_planning_problems/modified_q2_domain.pddl','w+') as file:
 	file.writelines(domain)	
 
 

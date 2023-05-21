@@ -1,7 +1,7 @@
 (define (problem run-generatorplus)
     (:domain generatorplus)
     (:objects gen - generator tank1  - tank)
-    (:init (= s 0)
+    (:init
 		(= (fuelLevel gen) 980)
 		(= (capacity gen) 1600)
 
@@ -15,5 +15,5 @@
 		(safe gen)
 		(= (running_time) 0 )
      )  
-     (:goal (and (< (s) 2) (generator-ran) (<= (running_time) 2000) ) )
+     (:goal (and (has_done_generatestart_1) (generator-ran) (<= (running_time) 1000) ) )
 )

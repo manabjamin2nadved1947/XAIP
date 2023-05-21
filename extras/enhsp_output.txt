@@ -1,0 +1,7 @@
+(0.00000) accelerate Parameters: 
+(0.00000,6.00000)------>waiting
+(6.00000) decelerate Parameters: 
+(6.00000) decelerate Parameters: 
+(6.00000,12.00000)------>waiting
+(12.00000) stop Parameters: 
+
