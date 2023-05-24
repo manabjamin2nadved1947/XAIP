@@ -32,9 +32,9 @@ Install nodejs (using Ubuntu) by the following command :
 
 <br>
 After cloning the repository, navigate to the project directory in your terminal and run the following command to install the required dependencies:
+
 `npm install
 `
-
 <br>
 
 Check that the install was successful by querying   
