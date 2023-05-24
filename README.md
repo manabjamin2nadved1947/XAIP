@@ -26,7 +26,7 @@ Before running this application, make sure you have the following installed in y
 - [ENHSP](https://sites.google.com/view/enhsp/) AI Planner
 
 ## Installing Dependencies
-After downloading, install nodejs (using Ubuntu) by the following command : 
+Install nodejs (using Ubuntu) by the following command : 
 
 `sudo apt-get install -y nodejs`
 
